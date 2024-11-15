@@ -1,0 +1,21 @@
+@startuml
+start
+:Mulai;
+
+: Tampilkan Menu Restoran;
+if (Pelanggan Memilih Item dari Menu?) then (Ya)
+    :Tambahkan ke Keranjang;
+    if (Pelanggan Checkout?) then (Ya)
+        :Masukkan Informasi dan Pilih Pembayaran;
+        :Konfirmasi dan Proses Pembayaran;
+        :Pesanan Dikirim ke Dapur;
+        :Dapur Memproses Pesanan;
+        :Tampilkan Status Pesanan ke Pelanggan;
+        stop
+    else (Tidak)
+        :Kembali ke Tampilkan Menu;
+    endif
+else (Tidak)
+    :Kembali ke Tampilkan Menu;
+endif
+@enduml

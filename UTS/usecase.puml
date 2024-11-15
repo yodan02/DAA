@@ -1,0 +1,49 @@
+@startuml
+package "Sistem Restoran" {
+
+    package " Menu Restoran" {
+        actor Pelanggan
+        usecase "Melihat Menu" as UC_MelihatMenu
+        usecase "Menambahkan Item ke Keranjang" as UC_TambahKeranjang
+        usecase "Melakukan Checkout" as UC_Checkout
+        usecase "Melakukan Pembayaran" as UC_Pembayaran
+    
+        actor Kasir
+        usecase "Memproses Pembayaran" as UC_ProsesPembayaran
+    }
+
+    actor Admin
+    usecase "Mengelola Menu" as UC_KelolaMenu
+
+    actor Chef
+    usecase "Menerima Pesanan" as UC_TerimaPesanan
+    usecase "Memproses Pesanan" as UC_ProsesPesanan
+    usecase "Memperbarui Status Pesanan" as UC_StatusPesanan
+
+}
+
+' Hubungan Fungsi Pelanggan
+Pelanggan --> UC_MelihatMenu
+Pelanggan --> UC_TambahKeranjang
+Pelanggan --> UC_Checkout
+Pelanggan --> UC_Pembayaran
+
+' Hubungan Fungsi Kasir
+Kasir --> UC_ProsesPembayaran
+
+' Hubungan Fungsi Admin
+Admin --> UC_KelolaMenu
+UC_KelolaMenu --> UC_MelihatMenu : <<include>>
+
+' Hubungan Fungsi Chef
+Chef --> UC_TerimaPesanan
+Chef --> UC_ProsesPesanan
+Chef --> UC_StatusPesanan
+
+' Include Relationships
+UC_Checkout --> UC_Pembayaran : <<include>>
+UC_Pembayaran --> UC_TerimaPesanan : <<include>>
+UC_TerimaPesanan --> UC_ProsesPesanan : <<include>>
+UC_ProsesPesanan --> UC_StatusPesanan : <<include>>
+UC_Pembayaran --> UC_ProsesPembayaran : <<include>>
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+actor "Mahasiswa" as mhs
+actor "Dosen" as dsn
+actor "Admin" as adm
+
+mhs --> (View grades)
+mhs --> (Register for courses)
+mhs --> (Manage courses)
+
+dsn --> (View classroom)
+dsn --> (Create classroom)
+dsn --> (Edit classroom)
+
+adm --> (Allocate class)
+adm --> (Delete classroom)
+adm --> (Remove admin)
+adm --> (Add course)
+adm --> (Manage classroom)
+
+(Register for courses) ..> (Allocate class) : <<include>>
+(View classroom) ..> (Create classroom) : <<include>>
+(Edit classroom) ..> (Create classroom) : <<include>>
+(Add course) ..> (Manage classroom) : <<extend>>
+
+package allocation {
+    
+}
+@enduml
